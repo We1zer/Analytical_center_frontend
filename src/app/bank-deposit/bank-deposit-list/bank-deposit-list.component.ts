@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BankDepositService } from '../bank-deposit.service';
 import { BankDeposit } from 'src/app/models/bank-deposit';
 import { Client } from 'src/app/models/client';
-import { map, Observable } from 'rxjs';
+
 
 
 @Component({

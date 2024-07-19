@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SecurityListComponent } from './security/security-list/security-list.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { BankDepositListComponent } from './bank-deposit/bank-deposit-list/bank-deposit-list.component';
+import { InvestmentListComponent } from './investment/investment-list/investment-list.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
  {
   path:'bankDeposits',
   component: BankDepositListComponent
+},
+{
+  path:'investments',
+  component: InvestmentListComponent
 },
   {
     path:'**',

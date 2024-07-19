@@ -1,0 +1,88 @@
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">Investment id</th>
+          <th>Security</th>
+          <th>Client</th>
+          <th>Purchase Price</th>
+          <th>Purchase Date</th>
+          <th>Sale Date</th>
+          <th>Sale Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let investment of investments">
+          <td class="hidden">{{ investment._id }}</td>
+          <td>{{ securities[investment.security] || 'Loading...' }}</td>
+          <td>{{ clients[investment.client] || 'Loading...' }}</td>
+          <td>{{ investment.purchasePrice }}</td>
+          <td>{{ investment.purchaseDate }}</td>
+          <td>{{ investment.saleDate }}</td>
+          <td>{{ investment.salePrice }}</td>
+         
+          <td class="action-buttons">
+            <button class="btn update-btn" (click)="onEdit(investment)">Update</button>
+            <button class="btn delete-btn" (click)="onSelectForDeletion(investment)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal for Editing -->
+  <div class="modal" *ngIf="selectedInvestment">
+    <div class="modal-content">
+      <form (ngSubmit)="onUpdate()">
+        <label>
+          Security:
+          <input [(ngModel)]="selectedInvestment.security" name="security">
+        </label>
+        <label>
+          Client:
+          <input [(ngModel)]="selectedInvestment.client" name="client">
+        </label>
+        <label>
+            Purchase Price:
+          <input [(ngModel)]="selectedInvestment.purchasePrice" name="purchasePrice">
+        </label>
+        <label>
+            Purchase Date:
+          <input [(ngModel)]="selectedInvestment.purchaseDate" name="purchaseDate">
+        </label>
+        <label>
+            Sale Date:
+          <input [(ngModel)]="selectedInvestment.saleDate" name="saleDate">
+        </label>
+        <label>
+            Sale Price:
+          <input [(ngModel)]="selectedInvestment.salePrice" name="salePrice">
+        </label>
+        <div class="modal-buttons">
+          <button type="submit">Save</button>
+          <button type="button" (click)="onCancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal for Deletion Confirmation -->
+  <div class="modal" *ngIf="selectedInvestmentForDeletion">
+    <div class="modal-content">
+      <p>Are you sure you want to delete the following investment?</p>
+      <ul>
+        <li>Security: {{ selectedInvestmentForDeletion.security }}</li>
+        <li>Client: {{ selectedInvestmentForDeletion.client }}</li>
+        <li>Purchase Price: {{ selectedInvestmentForDeletion.purchasePrice }}</li>
+        <li>Purchase Date: {{ selectedInvestmentForDeletion.purchaseDate }}</li>
+        <li>Sale Date: {{ selectedInvestmentForDeletion.saleDate }}</li>
+        <li>Sale Price: {{ selectedInvestmentForDeletion.salePrice }}</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="btn delete-btn" (click)="onDelete()">Delete</button>
+        <button (click)="onCancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
