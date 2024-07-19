@@ -1,0 +1,81 @@
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">Bank deposit id</th>
+          <th>Client</th>
+          <th>amount</th>
+          <th>Interest Rate</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bankDeposit of bankDeposits">
+          <td class="hidden">{{ bankDeposit._id }}</td>
+          <td>{{ clients[bankDeposit.client] || 'Loading...' }}</td>
+          <td>{{ bankDeposit.amount }}</td>
+          <td>{{ bankDeposit.interestRate }}</td>
+          <td>{{ bankDeposit.startDate }}</td>
+          <td>{{ bankDeposit.endDate }}</td>
+         
+          <td class="action-buttons">
+            <button class="btn update-btn" (click)="onEdit(bankDeposit)">Update</button>
+            <button class="btn delete-btn" (click)="onSelectForDeletion(bankDeposit)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal for Editing -->
+  <div class="modal" *ngIf="selectedBankDeposit">
+    <div class="modal-content">
+      <form (ngSubmit)="onUpdate()">
+        <label>
+            Client:
+          <input [(ngModel)]="selectedBankDeposit.client" name="client">
+        </label>
+        <label>
+            Amount:
+          <input [(ngModel)]="selectedBankDeposit.amount" name="amount">
+        </label>
+        <label>
+            Interest Rate:
+          <input [(ngModel)]="selectedBankDeposit.interestRate" name="interestRate">
+        </label>
+        <label>
+            Start Date:
+          <input [(ngModel)]="selectedBankDeposit.startDate" name="startDate">
+        </label>
+        <label>
+            End Date:
+           <input [(ngModel)]="selectedBankDeposit.endDate" name="endDate">
+         </label>
+        <div class="modal-buttons">
+          <button type="submit">Save</button>
+          <button type="button" (click)="onCancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal for Deletion Confirmation -->
+  <div class="modal" *ngIf="selectedBankDepositForDeletion">
+    <div class="modal-content">
+      <p>Are you sure you want to delete the following client?</p>
+      <ul>
+        <li>Client: {{ selectedBankDepositForDeletion.client }}</li>
+        <li>Amount: {{ selectedBankDepositForDeletion.amount }}</li>
+        <li>Interest Rate: {{ selectedBankDepositForDeletion.interestRate }}</li>
+        <li>Start Date: {{ selectedBankDepositForDeletion.startDate }}</li>
+        <li>End Date: {{ selectedBankDepositForDeletion.endDate }}</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="btn delete-btn" (click)="onDelete()">Delete</button>
+        <button (click)="onCancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  

@@ -12,6 +12,7 @@ import { CustomeInterceptor } from './services/custome.interceptor';
 import { SecurityModule } from './security/security.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientModule } from './client/client.module';
+import { BankDepositModule } from './bank-deposit/bank-deposit.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ClientModule } from './client/client.module';
     HttpClientModule,
     SecurityModule,
     ClientModule, 
+    BankDepositModule,
     BrowserAnimationsModule
   ],
   providers: [
