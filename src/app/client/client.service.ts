@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../models/client';
+import { BankDeposit } from '../models/bank-deposit';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ClientService {
     return this.http.get<Client[]>(this.apiUrl);
   }
 
-  getClient(): Observable<Client> {
-    return this.http.get<Client>(this.apiUrl);
+  getClient(client: Client): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl+`${client._id}` );
   }
 
   updateClient(clientData: Client): Observable<any> {

@@ -5,6 +5,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SecurityListComponent } from './security/security-list/security-list.component';
 import { ClientListComponent } from './client/client-list/client-list.component';
+import { BankDepositListComponent } from './bank-deposit/bank-deposit-list/bank-deposit-list.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
     path:'clients',
     component: ClientListComponent
  },
+ {
+  path:'bankDeposits',
+  component: BankDepositListComponent
+},
   {
     path:'**',
     component:LoginComponent

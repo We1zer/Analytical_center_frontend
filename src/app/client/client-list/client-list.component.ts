@@ -36,8 +36,8 @@ export class ClientListComponent {
       console.error('No security selected for update');
       return;
     }
-    const security = this.selectedClient;
-    this.clientService.updateClient(security).subscribe(
+    const client = this.selectedClient;
+    this.clientService.updateClient(client).subscribe(
       response => {
         console.log('Update successful:', response);
         this.selectedClient = null; 
@@ -66,8 +66,8 @@ export class ClientListComponent {
       console.error('No security selected for delete');
       return;
     }
-    const security = this.selectedClientForDeletion;
-    this.clientService.deleteClient(security._id).subscribe(
+    const client = this.selectedClientForDeletion;
+    this.clientService.deleteClient(client._id).subscribe(
       response => {
         console.log('Delete successful:', response);
         this.selectedClientForDeletion = null; 
