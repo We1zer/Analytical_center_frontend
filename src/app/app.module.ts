@@ -9,6 +9,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CustomeInterceptor } from './services/custome.interceptor';
+import { SecurityModule } from './security/security.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClientModule } from './client/client.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { CustomeInterceptor } from './services/custome.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    HttpClientModule
+    HttpClientModule,
+    SecurityModule,
+    ClientModule, 
+    BrowserAnimationsModule
   ],
   providers: [
     {

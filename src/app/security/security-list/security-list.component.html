@@ -1,0 +1,79 @@
+<div class="table-container">
+  <table class="security-table">
+    <thead>
+      <tr>
+        <th class="hidden">Security id</th>
+        <th>Security Code</th>
+        <th>Minimal Transaction Amount</th>
+        <th>Rating</th>
+        <th>Annual Yield</th>
+        <th>Additional Info</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let security of securities">
+        <td class="hidden">{{ security._id }}</td>
+        <td>{{ security.securityCode }}</td>
+        <td>{{ security.minTransactionAmount }}</td>
+        <td>{{ security.rating }}</td>
+        <td>{{ security.annualYield }}</td>
+        <td>{{ security.additionalInfo }}</td>
+        <td class="action-buttons">
+          <button class="btn update-btn" (click)="onEdit(security)">Update</button>
+          <button class="btn delete-btn" (click)="onSelectForDeletion(security)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal for Editing -->
+<div class="modal" *ngIf="selectedSecurity">
+  <div class="modal-content">
+    <form (ngSubmit)="onUpdate()">
+      <label>
+        Security Code:
+        <input [(ngModel)]="selectedSecurity.securityCode" name="securityCode">
+      </label>
+      <label>
+        Minimal Transaction Amount:
+        <input [(ngModel)]="selectedSecurity.minTransactionAmount" name="minTransactionAmount">
+      </label>
+      <label>
+        Rating:
+        <input [(ngModel)]="selectedSecurity.rating" name="rating">
+      </label>
+      <label>
+        Annual Yield:
+        <input [(ngModel)]="selectedSecurity.annualYield" name="annualYield">
+      </label>
+      <label>
+        Additional Info:
+        <input [(ngModel)]="selectedSecurity.additionalInfo" name="additionalInfo">
+      </label>
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="onCancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for Deletion Confirmation -->
+<div class="modal" *ngIf="selectedSecurityForDeletion">
+  <div class="modal-content">
+    <p>Are you sure you want to delete the following security?</p>
+    <ul>
+      <li>Security Code: {{ selectedSecurityForDeletion.securityCode }}</li>
+      <li>Minimal Transaction Amount: {{ selectedSecurityForDeletion.minTransactionAmount }}</li>
+      <li>Rating: {{ selectedSecurityForDeletion.rating }}</li>
+      <li>Annual Yield: {{ selectedSecurityForDeletion.annualYield }}</li>
+      <li>Additional Info: {{ selectedSecurityForDeletion.additionalInfo }}</li>
+    </ul>
+    <div class="modal-buttons">
+      <button class="btn delete-btn" (click)="onDelete()">Delete</button>
+      <button (click)="onCancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>

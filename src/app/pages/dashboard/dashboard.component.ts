@@ -1,5 +1,6 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Security } from 'src/app/models/security';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,13 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  users: any[]=[];
+  securities: Security[] = [];
+  
   constructor(private http: HttpClient){
-    this.loadUsers();
+    this.getRecommendation();
   }
-  loadUsers(){
-    this.http.get('http://localhost:5000/api/v1/users').subscribe((res:any)=>{
-        this.users = res.data;
+  getRecommendation(){
+    this.http.get('http://localhost:5000/api/v1/recommendation').subscribe((res:any)=>{
+        this.securities = res.data;
+        console.log('Loaded Recomended securities:', this.securities);
     })
   }
 }
