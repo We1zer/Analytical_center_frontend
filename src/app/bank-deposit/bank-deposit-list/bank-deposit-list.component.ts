@@ -109,23 +109,4 @@ export class BankDepositListComponent {
   onCancelDelete() {
     this.selectedBankDepositForDeletion = null;
   }
-  // GetClient(bankDepositClient: BankDeposit): Observable<Client> {
-  //   return this.bankDepositService.getClient(bankDepositClient).pipe(
-  //     map((data: any) => data.data)
-  //   );
-  // }
-
-  // GetClientName(bankDepositClient: BankDeposit): void {
-  //   this.bankDepositService.getClient(bankDepositClient).subscribe(
-  //     (data: any) => {
-  //       const client = data.data as Client;
-  //       this.clientName = client.name;
-  //     },
-  //     error => {
-  //       console.error('Error fetching client name:', error);
-  //     }
-  //   );
-  // }
-
-  
 }
