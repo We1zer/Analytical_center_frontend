@@ -1,0 +1,74 @@
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">Client id</th>
+          <th>Name</th>
+          <th>Owner ship type</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td class="hidden">{{ client._id }}</td>
+          <td>{{ client.name }}</td>
+          <td>{{ client.ownershipType }}</td>
+          <td>{{ client.address }}</td>
+          <td>{{ client.phone }}</td>
+         
+          <td class="action-buttons">
+            <button class="btn update-btn" (click)="onEdit(client)">Update</button>
+            <button class="btn delete-btn" (click)="onSelectForDeletion(client)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal for Editing -->
+  <div class="modal" *ngIf="selectedClient">
+    <div class="modal-content">
+      <form (ngSubmit)="onUpdate()">
+        <label>
+          Name:
+          <input [(ngModel)]="selectedClient.name" name="name">
+        </label>
+        <label>
+          Owner ship type:
+          <input [(ngModel)]="selectedClient.ownershipType" name="ownershipType">
+        </label>
+        <label>
+           Address:
+          <input [(ngModel)]="selectedClient.address" name="address">
+        </label>
+        <label>
+           Phone:
+          <input [(ngModel)]="selectedClient.phone" name="phone">
+        </label>
+        <div class="modal-buttons">
+          <button type="submit">Save</button>
+          <button type="button" (click)="onCancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal for Deletion Confirmation -->
+  <div class="modal" *ngIf="selectedClientForDeletion">
+    <div class="modal-content">
+      <p>Are you sure you want to delete the following client?</p>
+      <ul>
+        <li>Name: {{ selectedClientForDeletion.name }}</li>
+        <li>Owner ship type: {{ selectedClientForDeletion.ownershipType }}</li>
+        <li>Address: {{ selectedClientForDeletion.address }}</li>
+        <li>Phone: {{ selectedClientForDeletion.phone }}</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="btn delete-btn" (click)="onDelete()">Delete</button>
+        <button (click)="onCancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  

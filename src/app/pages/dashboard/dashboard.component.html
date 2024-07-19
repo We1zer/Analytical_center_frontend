@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">Security id</th>
+          <th>Security Code</th>
+          <th>Minimal Transaction Amount</th>
+          <th>Rating</th>
+          <th>Annual Yield</th>
+          <th>Additional Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let security of securities">
+          <td class="hidden">{{ security._id }}</td>
+          <td>{{ security.securityCode }}</td>
+          <td>{{ security.minTransactionAmount }}</td>
+          <td>{{ security.rating }}</td>
+          <td>{{ security.annualYield }}</td>
+          <td>{{ security.additionalInfo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
