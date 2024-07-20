@@ -17,8 +17,8 @@
           <td>{{ clients[bankDeposit.client] || 'Loading...' }}</td>
           <td>{{ bankDeposit.amount }}</td>
           <td>{{ bankDeposit.interestRate }}</td>
-          <td>{{ bankDeposit.startDate }}</td>
-          <td>{{ bankDeposit.endDate }}</td>
+          <td>{{ bankDeposit.startDate | date:'longDate' }}</td>
+          <td>{{ bankDeposit.endDate | date:'longDate' }}</td>
          
           <td class="action-buttons">
             <button class="btn update-btn" (click)="onEdit(bankDeposit)">Update</button>
