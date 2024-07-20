@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from '../security.service';
 import { Security } from 'src/app/models/security';
+import { Chart, registerables } from 'chart.js';
 
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-security-list',
