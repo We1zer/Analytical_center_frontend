@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "analytical-center-fr:build:production"
+              "buildTarget": "analytical-center-fr:build:production"
             },
             "development": {
-              "browserTarget": "analytical-center-fr:build:development"
+              "buildTarget": "analytical-center-fr:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "analytical-center-fr:build"
+            "buildTarget": "analytical-center-fr:build"
           }
         },
         "test": {
