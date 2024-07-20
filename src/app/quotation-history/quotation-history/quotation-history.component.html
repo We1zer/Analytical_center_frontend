@@ -1,0 +1,66 @@
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">ID</th>
+          <th>Security</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quotation of sortedQuotations">
+          <td class="hidden">{{ quotation._id }}</td>
+          <td>{{ securities[quotation.security] || 'Loading...' }}</td>
+          <td>{{ quotation.date | date:'longDate' }}</td>
+          <td>{{ quotation.price }}</td>
+          <td class="action-buttons">
+            <button class="btn update-btn" (click)="onEdit(quotation)">Update</button>
+            <button class="btn delete-btn" (click)="onSelectForDeletion(quotation)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal for Editing -->
+  <div class="modal" *ngIf="selectedQuotation">
+    <div class="modal-content">
+      <form (ngSubmit)="onUpdate()">
+        <label>
+          Security:
+          <input [(ngModel)]="selectedQuotation.security" name="security">
+        </label>
+        <label>
+          Date:
+          <input [(ngModel)]="selectedQuotation.date" name="date">
+        </label>
+        <label>
+          Price:
+          <input [(ngModel)]="selectedQuotation.price" name="price">
+        </label>
+        <div class="modal-buttons">
+          <button type="submit">Save</button>
+          <button type="button" (click)="onCancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal for Deletion Confirmation -->
+  <div class="modal" *ngIf="selectedQuotationForDeletion">
+    <div class="modal-content">
+      <p>Are you sure you want to delete the following quotation?</p>
+      <ul>
+        <li>Security: {{ selectedQuotationForDeletion.security }}</li>
+        <li>Date: {{ selectedQuotationForDeletion.date | date:'longDate' }}</li>
+        <li>Price: {{ selectedQuotationForDeletion.price }}</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="btn delete-btn" (click)="onDelete()">Delete</button>
+        <button (click)="onCancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  

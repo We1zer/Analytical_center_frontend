@@ -8,6 +8,7 @@ import { ClientListComponent } from './client/client-list/client-list.component'
 import { BankDepositListComponent } from './bank-deposit/bank-deposit-list/bank-deposit-list.component';
 import { InvestmentListComponent } from './investment/investment-list/investment-list.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
+import { QuotationHistoryComponent } from './quotation-history/quotation-history/quotation-history.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
 {
   path:'users',
   component: UsersListComponent
+},
+{
+  path:'quotations',
+  component: QuotationHistoryComponent
 },
   {
     path:'**',

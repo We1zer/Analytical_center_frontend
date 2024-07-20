@@ -15,6 +15,7 @@ import { ClientModule } from './client/client.module';
 import { BankDepositModule } from './bank-deposit/bank-deposit.module';
 import { InvestmentModule } from './investment/investment.module';
 import { UsersModule } from './users/users.module';
+import { QuotationHistoryModule } from './quotation-history/quotation-history.module';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -30,6 +31,7 @@ import { UsersModule } from './users/users.module';
         BankDepositModule,
         InvestmentModule,
         UsersModule,
+        QuotationHistoryModule,
         BrowserAnimationsModule], providers: [
         {
             provide: HTTP_INTERCEPTORS,
