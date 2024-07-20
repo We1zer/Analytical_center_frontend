@@ -7,7 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CustomeInterceptor } from './services/custome.interceptor';
 import { SecurityModule } from './security/security.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,32 +16,26 @@ import { BankDepositModule } from './bank-deposit/bank-deposit.module';
 import { InvestmentModule } from './investment/investment.module';
 import { UsersModule } from './users/users.module';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    LayoutComponent,
-    DashboardComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule, 
-    HttpClientModule,
-    SecurityModule,
-    ClientModule, 
-    BankDepositModule,
-    InvestmentModule,
-    UsersModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomeInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        LayoutComponent,
+        DashboardComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        SecurityModule,
+        ClientModule,
+        BankDepositModule,
+        InvestmentModule,
+        UsersModule,
+        BrowserAnimationsModule], providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CustomeInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
