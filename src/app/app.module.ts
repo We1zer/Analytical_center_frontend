@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientModule } from './client/client.module';
 import { BankDepositModule } from './bank-deposit/bank-deposit.module';
 import { InvestmentModule } from './investment/investment.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { InvestmentModule } from './investment/investment.module';
     ClientModule, 
     BankDepositModule,
     InvestmentModule,
+    UsersModule,
     BrowserAnimationsModule
   ],
   providers: [

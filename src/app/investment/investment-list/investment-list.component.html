@@ -18,8 +18,8 @@
           <td>{{ securities[investment.security] || 'Loading...' }}</td>
           <td>{{ clients[investment.client] || 'Loading...' }}</td>
           <td>{{ investment.purchasePrice }}</td>
-          <td>{{ investment.purchaseDate }}</td>
-          <td>{{ investment.saleDate }}</td>
+          <td>{{ investment.purchaseDate | date:'longDate' }}</td>
+          <td>{{ investment.saleDate | date:'longDate' }}</td>
           <td>{{ investment.salePrice }}</td>
          
           <td class="action-buttons">
