@@ -4,4 +4,5 @@ export class Quotationhistory {
     date: string = "";
     price: number = 0;
     securityCode?: string;
+    
 }

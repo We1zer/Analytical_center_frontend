@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Quotationhistory } from '../models/quotationhistory';
 import { Client } from 'src/app/models/client';
+import { Security } from 'src/app/models/security';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +29,10 @@ export class QuotationHistoryService {
 
   updateQuotationhistory(quotationData: Quotationhistory): Observable<any> {
     return this.http.put(`${this.apiUrl}${quotationData._id}`, quotationData);
+  }
+
+  updateSecurity(securityData: Security): Observable<any> {
+    return this.http.put(`${this.apiUrl2}${securityData._id}`, securityData);
   }
 
   deleteQuotationhistory(quotationid: string): Observable<any> {
