@@ -7,7 +7,9 @@
           <th>Email</th>
           <th>Role</th>
           <th>Created at</th>
-          <th>Action</th>
+          <th>Action
+            <button class="btn add-btn" (click)="onAdd()">Add</button>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +57,34 @@
     </div>
   </div>
   
+ <!-- Modal for Adding -->
+ <div class="modal" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <form (ngSubmit)="onAddNew()">
+      <label>
+        Name:
+      <input [(ngModel)]="newUser.name" name="name"  required="">
+    </label>
+    <label>
+        Email:
+      <input [(ngModel)]="newUser.email" name="email"  required="">
+    </label>
+    <label>
+      <input type="password" name="password" [(ngModel)]="newUser.password" placeholder="Password" required="">
+    </label>
+    <label>
+        Role:
+      <input [(ngModel)]="newUser.role" name="role">
+    </label>
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="onCancelAdd()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
   <!-- Modal for Deletion Confirmation -->
   <div class="modal" *ngIf="selectedUserForDeletion">
     <div class="modal-content">

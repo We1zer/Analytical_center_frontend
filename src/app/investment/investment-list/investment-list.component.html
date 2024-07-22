@@ -9,7 +9,9 @@
           <th>Purchase Date</th>
           <th>Sale Date</th>
           <th>Sale Price</th>
-          <th>Action</th>
+          <th>Action
+            <button class="btn add-btn" (click)="onAdd()">Add</button>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +69,42 @@
     </div>
   </div>
   
+   <!-- Modal for Adding -->
+<div class="modal" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <form (ngSubmit)="onAddNew()">
+      <label>
+        Security:
+        <input [(ngModel)]="newInvestment.security" name="newSecurity">
+      </label>
+      <label>
+        Client:
+        <input [(ngModel)]="newInvestment.client" name="newClient">
+      </label>
+      <label>
+          Purchase Price:
+        <input [(ngModel)]="newInvestment.purchasePrice" name="newPurchasePrice">
+      </label>
+      <label>
+          Purchase Date:
+        <input [(ngModel)]="newInvestment.purchaseDate" name="newPurchaseDate">
+      </label>
+      <label>
+          Sale Date:
+        <input [(ngModel)]="newInvestment.saleDate" name="newSaleDate">
+      </label>
+      <label>
+          Sale Price:
+        <input [(ngModel)]="newInvestment.salePrice" name="newSalePrice">
+      </label>
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="onCancelAdd()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
   <!-- Modal for Deletion Confirmation -->
   <div class="modal" *ngIf="selectedInvestmentForDeletion">
     <div class="modal-content">

@@ -31,6 +31,10 @@ export class QuotationHistoryService {
     return this.http.put(`${this.apiUrl}${quotationData._id}`, quotationData);
   }
 
+  createQuotationHistory(quotationData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, quotationData);
+  }
+
   updateSecurity(securityData: Security): Observable<any> {
     return this.http.put(`${this.apiUrl2}${securityData._id}`, securityData);
   }

@@ -6,7 +6,10 @@
           <th>Security</th>
           <th>Date</th>
           <th>Price</th>
-          <th>Action</th>
+          <th>Action
+            <button class="btn add-btn" (click)="onAdd()">Add</button>
+
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +51,30 @@
     </div>
   </div>
   
+ <!-- Modal for Adding -->
+ <div class="modal" *ngIf="isAddModalOpen">
+    <div class="modal-content">
+      <form (ngSubmit)="onAddNew()">
+        <label>
+            Security:
+            <input [(ngModel)]="newQuotation.security" name="newSecurity">
+          </label>
+          <label>
+            Date:
+            <input [(ngModel)]="newQuotation.date" name="newDate">
+          </label>
+          <label>
+            Price:
+            <input [(ngModel)]="newQuotation.price" name="newPrice">
+          </label>
+        <div class="modal-buttons">
+          <button type="submit">Save</button>
+          <button type="button" (click)="onCancelAdd()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Modal for Deletion Confirmation -->
   <div class="modal" *ngIf="selectedQuotationForDeletion">
     <div class="modal-content">

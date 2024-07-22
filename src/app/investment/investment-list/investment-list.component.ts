@@ -17,6 +17,15 @@ export class InvestmentListComponent {
   clientName: string | null = null;
   clients: { [key: string]: string } = {};
   securities: { [key: string]: string } = {};
+  newInvestment: any = {
+    security:  "",
+    client:  "",
+    purchasePrice: 0,
+    purchaseDate: "",
+    saleDate: "",
+    salePrice: 0
+   };
+   isAddModalOpen = false;
 
   constructor(private investmentService: InvestmentService) {}
 
@@ -73,7 +82,34 @@ export class InvestmentListComponent {
     };
   }
 
- 
+ onAdd(): void {
+    this.isAddModalOpen = true;
+    this.newInvestment = {
+      security:  "",
+    client:  "",
+    purchasePrice: 0,
+    purchaseDate: "",
+    saleDate: "",
+    salePrice: 0
+    };
+  }
+
+  onAddNew(): void {
+    this.investmentService.createInvestment(this.newInvestment).subscribe(
+      response => {
+        console.log('Add successful:', response);
+        this.isAddModalOpen = false;
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Add failed:', error);
+      }
+    );
+  }
+
+  onCancelAdd(): void {
+    this.isAddModalOpen = false;
+  }
 
   onUpdate(): void {
     if (!this.selectedInvestment) {

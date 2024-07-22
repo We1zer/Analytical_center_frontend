@@ -15,6 +15,13 @@ export class QuotationHistoryComponent implements OnInit {
   securities: { [key: string]: string } = {};
   sortedQuotations: Quotationhistory[] = [];
   updatedSecurities: { [key: string]: { rating: number, annualYield: number } } = {};
+  newQuotation: any = {
+    security: "",
+    date: "",
+    price:  0
+    
+   };
+   isAddModalOpen = false;
 
   constructor(private quotationService: QuotationHistoryService) {}
 
@@ -80,7 +87,31 @@ export class QuotationHistoryComponent implements OnInit {
         console.error('Error updating securities', error);
       });
   }
- 
+  onAdd(): void {
+    this.isAddModalOpen = true;
+    this.newQuotation = {
+      security: "",
+      date: "",
+      price:  0
+    };
+  }
+
+  onAddNew(): void {
+    this.quotationService.createQuotationHistory(this.newQuotation).subscribe(
+      response => {
+        console.log('Add successful:', response);
+        this.isAddModalOpen = false;
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Add failed:', error);
+      }
+    );
+  }
+
+  onCancelAdd(): void {
+    this.isAddModalOpen = false;
+  }
 
   sortAndGroupQuotations(): void {
     const groupedBySecurity = this.quotations.reduce((acc, quotation) => {

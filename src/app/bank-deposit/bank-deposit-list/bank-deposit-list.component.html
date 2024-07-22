@@ -8,7 +8,9 @@
           <th>Interest Rate</th>
           <th>Start Date</th>
           <th>End Date</th>
-          <th>Action</th>
+          <th>Action
+            <button class="btn add-btn" (click)="onAdd()">Add</button>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -61,6 +63,38 @@
     </div>
   </div>
   
+ <!-- Modal for Adding -->
+ <div class="modal" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <form (ngSubmit)="onAddNew()">
+      <label>
+        Client:
+      <input [(ngModel)]="newBankDeposit.client" name="newClient">
+    </label>
+    <label>
+        Amount:
+      <input [(ngModel)]="newBankDeposit.amount" name="newAmount">
+    </label>
+    <label>
+        Interest Rate:
+      <input [(ngModel)]="newBankDeposit.interestRate" name="newInterestRate">
+    </label>
+    <label>
+        Start Date:
+      <input [(ngModel)]="newBankDeposit.startDate" name="newStartDate">
+    </label>
+    <label>
+        End Date:
+       <input [(ngModel)]="newBankDeposit.endDate" name="newEndDate">
+     </label>
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="onCancelAdd()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
   <!-- Modal for Deletion Confirmation -->
   <div class="modal" *ngIf="selectedBankDepositForDeletion">
     <div class="modal-content">

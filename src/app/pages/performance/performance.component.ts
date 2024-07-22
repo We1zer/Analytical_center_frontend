@@ -13,7 +13,7 @@ export class PerfomanceComponent {
     this.getRecommendation();
   }
   getRecommendation(){
-    this.http.get('http://localhost:5000/api/v1/recommendation/performance').subscribe((res:any)=>{
+    this.http.get('https://analytical-center-backend-we1zer.onrender.com/api/v1/recommendation/performance').subscribe((res:any)=>{
         this.performances = res.data;
         console.log('Loaded investment perfomance:', this.performances);
     })

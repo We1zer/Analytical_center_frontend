@@ -21,6 +21,10 @@ export class ClientService {
   getClient(client: Client): Observable<Client> {
     return this.http.get<Client>(this.apiUrl+`${client._id}` );
   }
+  
+  createClient(clientData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, clientData);
+  }
 
   updateClient(clientData: Client): Observable<any> {
     return this.http.put(`${this.apiUrl}${clientData._id}`, clientData);

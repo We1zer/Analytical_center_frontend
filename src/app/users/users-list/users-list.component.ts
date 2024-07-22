@@ -11,6 +11,14 @@ export class UsersListComponent {
   users: Users[] = [];
   selectedUser: Users | null = null;
   selectedUserForDeletion: Users | null = null;
+  newUser: any = {
+    name: "",
+    email: "",
+    password: "",
+    role: ""
+    
+   };
+   isAddModalOpen = false;
 
   constructor(private usersService: UsersService) {}
 
@@ -47,6 +55,33 @@ export class UsersListComponent {
         console.error('Update failed:', error);
       }
     );
+  }
+
+  onAdd(): void {
+    this.isAddModalOpen = true;
+    this.newUser = {
+     name: "",
+    email: "",
+    password: "",
+    role: ""
+    };
+  }
+
+  onAddNew(): void {
+    this.usersService.createUser(this.newUser).subscribe(
+      response => {
+        console.log('Add successful:', response);
+        this.isAddModalOpen = false;
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Add failed:', error);
+      }
+    );
+  }
+
+  onCancelAdd(): void {
+    this.isAddModalOpen = false;
   }
 
   onCancelEdit(): void {
