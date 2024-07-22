@@ -32,6 +32,10 @@ export class InvestmentService {
     return this.http.get<Client>(this.apiUrl2+`${securityId}`);
   }
 
+  createInvestment(investmentData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, investmentData);
+  }
+
   updateInvestment(investmentData: Investment): Observable<any> {
     return this.http.put(`${this.apiUrl}${investmentData._id}`, investmentData);
   }

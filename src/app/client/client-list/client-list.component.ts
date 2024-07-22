@@ -11,7 +11,13 @@ export class ClientListComponent {
   clients: Client[] = [];
   selectedClient: Client | null = null;
   selectedClientForDeletion: Client | null = null;
-
+  newClient: any = {
+   name:"",
+    ownershipType: "",
+    address:  "",
+    phone: ""
+  };
+  isAddModalOpen = false;
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
@@ -29,6 +35,28 @@ export class ClientListComponent {
       address: client.address,
       phone: client.phone
     };
+  }
+  onAdd(): void {
+    this.isAddModalOpen = true;
+    this.newClient = {
+      name:"",
+      ownershipType: "",
+      address:  "",
+      phone: ""
+    };
+  }
+
+  onAddNew(): void {
+    this.clientService.createClient(this.newClient).subscribe(
+      response => {
+        console.log('Add successful:', response);
+        this.isAddModalOpen = false;
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Add failed:', error);
+      }
+    );
   }
 
   onUpdate(): void {
@@ -52,6 +80,11 @@ export class ClientListComponent {
   onCancelEdit(): void {
     this.selectedClient = null; 
   }
+
+  onCancelAdd(): void {
+    this.isAddModalOpen = false;
+  }
+  
   onSelectForDeletion(client: any) {
     this.selectedClientForDeletion = { 
       _id: client._id,

@@ -27,6 +27,10 @@ export class BankDepositService {
     return this.http.get<Client>(this.apiUrl1+`${clientId}`);
   }
 
+  createBankDeposit(depositData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, depositData);
+  }
+
   updateBankDeposit(bankDepositData: BankDeposit): Observable<any> {
     return this.http.put(`${this.apiUrl}${bankDepositData._id}`, bankDepositData);
   }

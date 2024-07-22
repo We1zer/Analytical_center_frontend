@@ -14,7 +14,7 @@ export class DashboardComponent {
     this.getRecommendation();
   }
   getRecommendation(){
-    this.http.get('http://localhost:5000/api/v1/recommendation').subscribe((res:any)=>{
+    this.http.get('https://analytical-center-backend-we1zer.onrender.com/api/v1/recommendation').subscribe((res:any)=>{
         this.securities = res.data;
         console.log('Loaded Recomended securities:', this.securities);
     })

@@ -26,7 +26,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router){ }
 
   onLogin(){
-    this.http.post('http://localhost:5000/api/v1/auth/login', this.loginObj).subscribe((res:any)=>{
+    this.http.post('https://analytical-center-backend-we1zer.onrender.com/api/v1/auth/login', this.loginObj).subscribe((res:any)=>{
       if(res.success) {
         alert('login Success');
         localStorage.setItem('loginToken', res.token);
@@ -38,7 +38,7 @@ export class LoginComponent {
   }
 
   onRegister(){
-    this.http.post('http://localhost:5000/api/v1/auth/register', this.registerObj).subscribe((res:any)=>{
+    this.http.post('https://analytical-center-backend-we1zer.onrender.com/api/v1/auth/register', this.registerObj).subscribe((res:any)=>{
       if(res.success) {
         alert('Register Success');
         localStorage.setItem('loginToken', res.token);
@@ -51,7 +51,7 @@ export class LoginComponent {
 
   onForgotPassword(email: string){
     this.forgotPasswordObj.email=email;
-    this.http.post('http://localhost:5000/api/v1/auth/forgotpassword', this.forgotPasswordObj).subscribe((res:any)=>{
+    this.http.post('https://analytical-center-backend-we1zer.onrender.com/api/v1/auth/forgotpassword', this.forgotPasswordObj).subscribe((res:any)=>{
       if(res.success) {
         alert(`Forgot Password Success ${res.data}`);
         this.router.navigateByUrl('/dashboard');

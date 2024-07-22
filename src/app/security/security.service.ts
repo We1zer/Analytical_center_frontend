@@ -23,9 +23,11 @@ export class SecurityService {
   getSecurity(): Observable<Security> {
     return this.http.get<Security>(this.apiUrl1);
   }
+
   createSecurity(securityData: CreateSecurity): Observable<any> {
     return this.http.post(`${this.apiUrl2}`, securityData);
   }
+  
   updateSecurity(securityData: Security): Observable<any> {
     return this.http.put(`${this.apiUrl1}${securityData._id}`, securityData);
   }

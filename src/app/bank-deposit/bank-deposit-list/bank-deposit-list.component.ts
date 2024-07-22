@@ -17,6 +17,14 @@ export class BankDepositListComponent {
   selectedBankDepositForDeletion: BankDeposit | null = null;
   clientName: string | null = null;
   clients: { [key: string]: string } = {};
+  newBankDeposit: any = {
+    client: "",
+    amount: 0,
+    interestRate: 0,
+    startDate: "",
+    endDate: ""
+   };
+   isAddModalOpen = false;
 
   constructor(private bankDepositService: BankDepositService) {}
   ngOnInit(): void {
@@ -54,8 +62,33 @@ export class BankDepositListComponent {
       endDate: bankDeposit.endDate
     };
   }
+  onAdd(): void {
+    this.isAddModalOpen = true;
+    this.newBankDeposit = {
+      client: "",
+    amount: 0,
+    interestRate: 0,
+    startDate: "",
+    endDate: ""
+    };
+  }
 
+  onAddNew(): void {
+    this.bankDepositService.createBankDeposit(this.newBankDeposit).subscribe(
+      response => {
+        console.log('Add successful:', response);
+        this.isAddModalOpen = false;
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Add failed:', error);
+      }
+    );
+  }
  
+ onCancelAdd(): void {
+    this.isAddModalOpen = false;
+  }
 
   onUpdate(): void {
     if (!this.selectedBankDeposit) {
