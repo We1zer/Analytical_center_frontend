@@ -34,7 +34,9 @@ export class QuotationHistoryService {
   updateSecurity(securityData: Security): Observable<any> {
     return this.http.put(`${this.apiUrl2}${securityData._id}`, securityData);
   }
-
+  updateRatingAndAnnualYield(id: string, updateData: { rating: number, annualYield: number }): Observable<any> {
+    return this.http.put(`${this.apiUrl2}${id}`, updateData);
+  }
   deleteQuotationhistory(quotationid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}${quotationid}`);
   }
