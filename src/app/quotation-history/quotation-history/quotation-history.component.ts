@@ -14,6 +14,7 @@ export class QuotationHistoryComponent implements OnInit {
   selectedQuotationForDeletion: Quotationhistory | null = null;
   securities: { [key: string]: string } = {};
   sortedQuotations: Quotationhistory[] = [];
+  updatedSecurities: { [key: string]: { rating: number, annualYield: number } } = {};
 
   constructor(private quotationService: QuotationHistoryService) {}
 
@@ -21,16 +22,16 @@ export class QuotationHistoryComponent implements OnInit {
     this.quotationService.getQuotationhistories().subscribe((data: any) => {
       this.quotations = data.data;
 
-      // Отримати деталі безпеки для кожної запису
       const securityPromises = this.quotations.map(quotation => 
         this.getSecurityCode(quotation.security)
       );
       
       Promise.all(securityPromises).then(() => {
-        // Групування та сортування даних
         this.sortAndGroupQuotations();
         console.log('Loaded quotations:', this.sortedQuotations);
       });
+      this.calculateRatingAndAnnualYield();
+      this.updateSecurities();
     });
   }
 
@@ -50,8 +51,38 @@ export class QuotationHistoryComponent implements OnInit {
     });
   }
 
+  calculateRatingAndAnnualYield(): void {
+    this.quotations.forEach(quotation => {
+      const securityId = quotation.security;
+      const price = quotation.price;
+
+      const rating = price % 10; 
+      const annualYield = price % 5; 
+
+      this.updatedSecurities[securityId] = {
+        rating,
+        annualYield
+      };
+    });
+  }
+
+  updateSecurities(): void {
+    const updatePromises = Object.keys(this.updatedSecurities).map(securityId => {
+      const updateData = this.updatedSecurities[securityId];
+      return this.quotationService.updateRatingAndAnnualYield(securityId, updateData).toPromise();
+    });
+
+    Promise.all(updatePromises)
+      .then(results => {
+        console.log('All securities updated successfully', results);
+      })
+      .catch(error => {
+        console.error('Error updating securities', error);
+      });
+  }
+ 
+
   sortAndGroupQuotations(): void {
-    // Групування даних по security
     const groupedBySecurity = this.quotations.reduce((acc, quotation) => {
       if (!acc[quotation.security]) {
         acc[quotation.security] = [];
@@ -63,14 +94,11 @@ export class QuotationHistoryComponent implements OnInit {
       return acc;
     }, {} as { [key: string]: Quotationhistory[] });
 
-    // Сортування всередині кожної групи по даті
     this.sortedQuotations = Object.values(groupedBySecurity).flat()
       .sort((a, b) => {
-        // Сортування по security
         if (a.security !== b.security) {
           return a.security.localeCompare(b.security);
         }
-        // Сортування по даті у зростаючому порядку
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       });
   }
