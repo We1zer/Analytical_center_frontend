@@ -80,9 +80,7 @@ export class QuotationHistoryComponent implements OnInit {
         console.error('Error updating securities', error);
       });
   }
-  getUpdatedSecurities(): { [key: string]: { rating: number, annualYield: number } } {
-    return this.updatedSecurities;
-  }
+ 
 
   sortAndGroupQuotations(): void {
     const groupedBySecurity = this.quotations.reduce((acc, quotation) => {
