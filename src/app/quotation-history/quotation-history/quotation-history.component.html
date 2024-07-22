@@ -6,7 +6,7 @@
           <th>Security</th>
           <th>Date</th>
           <th>Price</th>
-          <th>Action
+          <th *ngIf="role === 'admin'">Action
             <button class="btn add-btn" (click)="onAdd()">Add</button>
 
           </th>
@@ -18,7 +18,7 @@
           <td>{{ securities[quotation.security] || 'Loading...' }}</td>
           <td>{{ quotation.date | date:'longDate' }}</td>
           <td>{{ quotation.price }}</td>
-          <td class="action-buttons">
+          <td class="action-buttons" *ngIf="role === 'admin'">
             <button class="btn update-btn" (click)="onEdit(quotation)">Update</button>
             <button class="btn delete-btn" (click)="onSelectForDeletion(quotation)">Delete</button>
           </td>

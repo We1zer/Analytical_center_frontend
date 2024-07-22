@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Quotationhistory } from '../models/quotationhistory';
 import { Client } from 'src/app/models/client';
 import { Security } from 'src/app/models/security';
@@ -11,9 +11,9 @@ import { Security } from 'src/app/models/security';
 export class QuotationHistoryService {
 
   private apiUrl = environment.apiUrl + "/api/v1/quotation/";
+  private apiUrl1 = environment.apiUrl + "/api/v1/auth/me";
   private apiUrl2 = environment.apiUrl + "/api/v1/security/";
-
-
+  
   constructor(private http: HttpClient) {}
 
   getQuotationhistories(): Observable<Quotationhistory[]> {
@@ -44,4 +44,9 @@ export class QuotationHistoryService {
   deleteQuotationhistory(quotationid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}${quotationid}`);
   }
+  
+  getMe(): Observable<any> {
+    return this.http.get<Client>(this.apiUrl1);
+  }
+  
 }

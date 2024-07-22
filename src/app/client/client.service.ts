@@ -11,6 +11,7 @@ import { BankDeposit } from '../models/bank-deposit';
 export class ClientService {
 
   private apiUrl = environment.apiUrl + "/api/v1/client/";
+  private apiUrl1 = environment.apiUrl + "/api/v1/auth/me";
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +22,7 @@ export class ClientService {
   getClient(client: Client): Observable<Client> {
     return this.http.get<Client>(this.apiUrl+`${client._id}` );
   }
-  
+
   createClient(clientData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, clientData);
   }
@@ -33,4 +34,9 @@ export class ClientService {
   deleteClient(clientid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}${clientid}`);
   }
+
+  getMe(): Observable<any> {
+    return this.http.get<any>(this.apiUrl1);
+  }
 }
+

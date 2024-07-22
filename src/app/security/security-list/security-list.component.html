@@ -8,7 +8,7 @@
         <th>Rating</th>
         <th>Annual Yield</th>
         <th>Additional Info</th>
-        <th>
+        <th *ngIf="role === 'admin'">
           Action   
           <button class="btn add-btn" (click)="onAdd()">Add</button> 
         </th>
@@ -22,7 +22,7 @@
         <td>{{ security.rating }}</td>
         <td>{{ security.annualYield }}</td>
         <td>{{ security.additionalInfo }}</td>
-        <td class="action-buttons">
+        <td class="action-buttons" *ngIf="role === 'admin'">
           <button class="btn update-btn" (click)="onEdit(security)">Update</button>
           <button class="btn delete-btn" (click)="onSelectForDeletion(security)">Delete</button>
         </td>

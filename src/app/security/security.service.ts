@@ -13,6 +13,8 @@ export class SecurityService {
   private apiUrl = environment.apiUrl + "/api/v1/securities";
   private apiUrl1 = environment.apiUrl + "/api/v1/security/";
   private apiUrl2 = environment.apiUrl + "/api/v1/security";
+  private apiUrl3 = environment.apiUrl + "/api/v1/auth/me";
+
 
   constructor(private http: HttpClient) {}
 
@@ -27,12 +29,16 @@ export class SecurityService {
   createSecurity(securityData: CreateSecurity): Observable<any> {
     return this.http.post(`${this.apiUrl2}`, securityData);
   }
-  
+
   updateSecurity(securityData: Security): Observable<any> {
     return this.http.put(`${this.apiUrl1}${securityData._id}`, securityData);
   }
 
   deleteSecurity(securityid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl1}${securityid}`);
+  }
+
+  getMe(): Observable<any> {
+    return this.http.get<any>(this.apiUrl3);
   }
 }

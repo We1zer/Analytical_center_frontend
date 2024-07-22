@@ -23,6 +23,7 @@ export class SecurityListComponent implements OnInit {
     additionalInfo: ''
   };
   isAddModalOpen = false;
+  role: string | undefined;
 
   constructor(private securityService: SecurityService) {}
 
@@ -34,6 +35,10 @@ export class SecurityListComponent implements OnInit {
     this.securityService.getSecurities().subscribe((data: any) => {
       this.securities = data.data;
       console.log('Loaded securities:', this.securities);
+    });
+    this.securityService.getMe().subscribe((data: any) => {
+      this.role = data.data.role;
+      console.log(this.role);
     });
   }
 

@@ -22,6 +22,7 @@ export class QuotationHistoryComponent implements OnInit {
     
    };
    isAddModalOpen = false;
+   role: string | undefined;
 
   constructor(private quotationService: QuotationHistoryService) {}
 
@@ -32,7 +33,11 @@ export class QuotationHistoryComponent implements OnInit {
       const securityPromises = this.quotations.map(quotation => 
         this.getSecurityCode(quotation.security)
       );
-      
+      this.quotationService.getMe().subscribe((data: any) => {
+        this.role = data.data.role;
+        console.log(this.role);
+      });
+
       Promise.all(securityPromises).then(() => {
         this.sortAndGroupQuotations();
         console.log('Loaded quotations:', this.sortedQuotations);
@@ -57,6 +62,8 @@ export class QuotationHistoryComponent implements OnInit {
       );
     });
   }
+
+  
 
   calculateRatingAndAnnualYield(): void {
     this.quotations.forEach(quotation => {
@@ -112,6 +119,8 @@ export class QuotationHistoryComponent implements OnInit {
   onCancelAdd(): void {
     this.isAddModalOpen = false;
   }
+
+  
 
   sortAndGroupQuotations(): void {
     const groupedBySecurity = this.quotations.reduce((acc, quotation) => {

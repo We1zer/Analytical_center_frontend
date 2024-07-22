@@ -18,12 +18,18 @@ export class ClientListComponent {
     phone: ""
   };
   isAddModalOpen = false;
+  role: string | undefined;
+
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
     this.clientService.getClients().subscribe((data: any) => {
       this.clients = data.data;
       console.log('Loaded securities:', this.clients);
+      this.clientService.getMe().subscribe((data: any) => {
+        this.role = data.data.role;
+        console.log(this.role);
+      });
     });
   }
 

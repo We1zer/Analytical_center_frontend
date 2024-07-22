@@ -26,6 +26,7 @@ export class InvestmentListComponent {
     salePrice: 0
    };
    isAddModalOpen = false;
+  role: string | undefined;
 
   constructor(private investmentService: InvestmentService) {}
 
@@ -33,7 +34,11 @@ export class InvestmentListComponent {
       this.investmentService.getInvestments().subscribe((data: any) => {
         this.investments = data.data;
 
-       
+        this.investmentService.getMe().subscribe((data: any) => {
+          this.role = data.data.role;
+          console.log(this.role);
+        });
+        
         this.investments.forEach(investment => {
           this.getClientName(investment.client);  
         });

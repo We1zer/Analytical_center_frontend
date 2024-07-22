@@ -12,6 +12,8 @@ export class BankDepositService {
 
   private apiUrl = environment.apiUrl + "/api/v1/bankDeposit/";
   private apiUrl1 = environment.apiUrl + "/api/v1/client/";
+  private apiUrl2 = environment.apiUrl + "/api/v1/auth/me";
+
 
   constructor(private http: HttpClient) {}
 
@@ -37,5 +39,9 @@ export class BankDepositService {
 
   deleteBankDeposit(bankDepositid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}${bankDepositid}`);
+  }
+
+  getMe(): Observable<any> {
+    return this.http.get<Client>(this.apiUrl2);
   }
 }

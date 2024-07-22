@@ -13,6 +13,8 @@ export class InvestmentService {
   private apiUrl = environment.apiUrl + "/api/v1/investment/";
   private apiUrl1 = environment.apiUrl + "/api/v1/client/";
   private apiUrl2 = environment.apiUrl + "/api/v1/security/";
+  private apiUrl3 = environment.apiUrl + "/api/v1/auth/me";
+
 
   constructor(private http: HttpClient) {}
 
@@ -42,5 +44,9 @@ export class InvestmentService {
 
   deleteInvestment(investmentid: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}${investmentid}`);
+  }
+
+  getMe(): Observable<any> {
+    return this.http.get<any>(this.apiUrl3);
   }
 }

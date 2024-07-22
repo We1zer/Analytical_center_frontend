@@ -25,6 +25,7 @@ export class BankDepositListComponent {
     endDate: ""
    };
    isAddModalOpen = false;
+  role: string | undefined;
 
   constructor(private bankDepositService: BankDepositService) {}
   ngOnInit(): void {
@@ -35,7 +36,10 @@ export class BankDepositListComponent {
         this.bankDeposits.forEach(deposit => {
           this.getClientName(deposit.client);  
         });
-
+        this.bankDepositService.getMe().subscribe((data: any) => {
+          this.role = data.data.role;
+          console.log(this.role);
+        });
         console.log('Loaded bank deposits:', this.bankDeposits);
       });
     }

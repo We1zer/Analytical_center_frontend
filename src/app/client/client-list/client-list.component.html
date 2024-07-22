@@ -1,4 +1,5 @@
-<div class="table-container">
+ 
+ <div class="table-container">
     <table class="security-table">
       <thead>
         <tr>
@@ -7,8 +8,7 @@
           <th>Owner ship type</th>
           <th>Address</th>
           <th>Phone</th>
-          <th>
-            Action 
+          <th *ngIf="role === 'admin'" >Action
             <button class="btn add-btn" (click)="onAdd()">Add</button>
           </th>
         </tr>
@@ -21,7 +21,7 @@
           <td>{{ client.address }}</td>
           <td>{{ client.phone }}</td>
          
-          <td class="action-buttons">
+          <td class="action-buttons" *ngIf="role === 'admin'">
             <button class="btn update-btn" (click)="onEdit(client)">Update</button>
             <button class="btn delete-btn" (click)="onSelectForDeletion(client)">Delete</button>
           </td>
