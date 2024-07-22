@@ -49,6 +49,16 @@
   display: none;
 }
 
+.add-btn {
+  margin-left: 35px;
+  background-color: #2492c9;
+  color: #fff;
+}
+
+.add-btn:hover {
+  background-color: #214388;
+}
+
 /* Action Buttons */
 .action-buttons {
   display: flex;
