@@ -1,25 +1,26 @@
 <!-- navbar.component.html -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard">Dashboard</a>
+  <div class="container-fluid" >
+    <ul class="navbar-nav" >
+      <li class="nav-item" >
+        <a class="nav-link"  href="/dashboard">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/performance">Performance</a>
+        <a class="nav-link"  href="/performance">Performance</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/bankDeposits">Bank Deposits</a>
+        <a class="nav-link"  href="/bankDeposits">Bank Deposits</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/quotations">Quotations</a>
+        <a class="nav-link"  href="/quotations">Quotations</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+      <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" *ngIf="role === 'user' || role === 'admin'">More</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/securities">Securities</a></li>
           <li><a class="dropdown-item" href="/clients">Clients</a></li>
           <li><a class="dropdown-item" href="/investments">Investments</a></li>
+          <li><a class="dropdown-item" *ngIf="role === 'admin'" href="/users">Users</a></li>
         </ul>
       </li>
     </ul>

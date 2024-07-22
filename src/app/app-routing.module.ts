@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path:'',
-    redirectTo:'/securities',
+    redirectTo:'/login',
     pathMatch:'full'
   },
   {

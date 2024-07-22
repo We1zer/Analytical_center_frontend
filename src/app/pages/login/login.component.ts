@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +11,27 @@ import { Route, Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  role: string | undefined;
+
+  private apiUrl1 = environment.apiUrl + "/api/v1/auth/me";
+  cdr: any;
+
   loginObj: any = {
    
     "email": "",
     "password": ""
-    
   };
+
   registerObj: any = {
     "name": "",
     "email": "",
     "password": ""
   };
+
   forgotPasswordObj: any = {
     "email": ""
   };
+
   constructor(private http: HttpClient, private router: Router){ }
 
   onLogin(){
@@ -30,6 +39,7 @@ export class LoginComponent {
       if(res.success) {
         alert('login Success');
         localStorage.setItem('loginToken', res.token);
+      //  this.authService.emitAuthStatusChange(true);
         this.router.navigateByUrl('/dashboard');
       }else{
         alert(res.error);
@@ -42,6 +52,7 @@ export class LoginComponent {
       if(res.success) {
         alert('Register Success');
         localStorage.setItem('loginToken', res.token);
+       // this.authService.emitAuthStatusChange(true);
         this.router.navigateByUrl('/dashboard');
       }else{
         alert(res.error);
@@ -60,6 +71,8 @@ export class LoginComponent {
       }
     })
   }
- 
 
+  getMe(): Observable<any> {
+    return this.http.get<any>(this.apiUrl1);
+  }
 }

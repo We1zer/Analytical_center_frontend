@@ -9,7 +9,10 @@
           <th>Purchase Date</th>
           <th>Sale Date</th>
           <th>Sale Price</th>
-          <th>Action
+          <th *ngIf="role === 'admin'" >Action
+            <button class="btn add-btn" (click)="onAdd()">Add</button>
+          </th>
+          <th *ngIf="role === 'user'" >
             <button class="btn add-btn" (click)="onAdd()">Add</button>
           </th>
         </tr>
@@ -24,10 +27,11 @@
           <td>{{ investment.saleDate | date:'longDate' }}</td>
           <td>{{ investment.salePrice }}</td>
          
-          <td class="action-buttons">
+          <td class="action-buttons " *ngIf="role === 'admin'">
             <button class="btn update-btn" (click)="onEdit(investment)">Update</button>
             <button class="btn delete-btn" (click)="onSelectForDeletion(investment)">Delete</button>
           </td>
+          <td *ngIf="role === 'user'"> </td>
         </tr>
       </tbody>
     </table>
