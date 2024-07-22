@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PerfomanceComponent } from './pages/performance/performance.component';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CustomeInterceptor } from './services/custome.interceptor';
@@ -21,7 +22,8 @@ import { QuotationHistoryModule } from './quotation-history/quotation-history.mo
         AppComponent,
         LoginComponent,
         LayoutComponent,
-        DashboardComponent
+        DashboardComponent,
+        PerfomanceComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

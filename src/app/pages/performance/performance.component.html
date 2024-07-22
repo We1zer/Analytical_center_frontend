@@ -1,0 +1,26 @@
+<div class="table-container">
+    <table class="security-table">
+      <thead>
+        <tr>
+          <th class="hidden">Investment id</th>
+          <th>Security Code</th>
+          <th>Client name</th>
+          <th>Purchase Date</th>
+          <th>Sale Date</th>
+          <th>Profit</th>
+          <th>Profit Percentage </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let performance of performances">
+          <td class="hidden">{{ performance.investment._id }}</td>
+          <td>{{ performance.investment.security.securityCode }}</td>
+          <td>{{ performance.investment.client.name }}</td>
+          <td>{{ performance.investment.purchaseDate | date:'longDate' }}</td>
+          <td>{{ performance.investment.saleDate | date:'longDate' }}</td>
+          <td>{{ performance.profit | number:'1.2-2' }}</td>
+          <td>{{ performance.profitPercentage | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
