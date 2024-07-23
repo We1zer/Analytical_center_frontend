@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,12 +21,18 @@ export class LayoutComponent {
   
 
 
-  constructor(private http: HttpClient, private router: Router){ }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService){ }
 
   ngOnInit(): void {
-    this.getMe().subscribe((data: any) => {
-      this.role = data.data.role;
-      console.log(this.role);
+    this.authService.authStatus$.subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.getMe().subscribe((data: any) => {
+          this.role = data.data.role;
+          console.log(this.role);
+        });
+      } else {
+        this.role = undefined;
+      }
     });
   }
 
@@ -34,10 +41,8 @@ export class LayoutComponent {
       if(res.success) {
         alert('Logout Success');
         localStorage.removeItem('loginToken');
+        this.authService.emitAuthStatusChange(false);
         this.router.navigateByUrl('/');
-        this.role = undefined; 
-       // this.authService.emitAuthStatusChange(false);
-        this.cdr.detectChanges(); 
       }else{
         alert(res.error);
       }
