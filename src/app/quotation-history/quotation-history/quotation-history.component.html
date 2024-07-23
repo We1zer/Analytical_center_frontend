@@ -56,16 +56,20 @@
     <div class="modal-content">
       <form (ngSubmit)="onAddNew()">
         <label>
-            Security:
-            <input [(ngModel)]="newQuotation.security" name="newSecurity">
-          </label>
+          Security:
+          <select [(ngModel)]="newQuotation.security" name="newSecurity">
+            <option *ngFor="let securitiesCode of securitiesCodes" [value]="securitiess[securitiesCode]">
+              {{ securitiesCode }}
+            </option>
+          </select>
+        </label>
           <label>
             Date:
-            <input [(ngModel)]="newQuotation.date" name="newDate">
+            <input [(ngModel)]="newQuotation.date" name="newDate" type="date">
           </label>
           <label>
             Price:
-            <input [(ngModel)]="newQuotation.price" name="newPrice">
+            <input [(ngModel)]="newQuotation.price" name="newPrice" type="number">
           </label>
         <div class="modal-buttons">
           <button type="submit">Save</button>
