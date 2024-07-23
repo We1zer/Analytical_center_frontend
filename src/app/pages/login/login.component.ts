@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -32,14 +33,14 @@ export class LoginComponent {
     "email": ""
   };
 
-  constructor(private http: HttpClient, private router: Router){ }
+  constructor(private http: HttpClient, private router: Router,private authService: AuthService){ }
 
   onLogin(){
     this.http.post('https://analytical-center-backend-we1zer.onrender.com/api/v1/auth/login', this.loginObj).subscribe((res:any)=>{
       if(res.success) {
         alert('login Success');
         localStorage.setItem('loginToken', res.token);
-      //  this.authService.emitAuthStatusChange(true);
+        this.authService.emitAuthStatusChange(true);
         this.router.navigateByUrl('/dashboard');
       }else{
         alert(res.error);
@@ -52,7 +53,7 @@ export class LoginComponent {
       if(res.success) {
         alert('Register Success');
         localStorage.setItem('loginToken', res.token);
-       // this.authService.emitAuthStatusChange(true);
+        this.authService.emitAuthStatusChange(true);
         this.router.navigateByUrl('/dashboard');
       }else{
         alert(res.error);
