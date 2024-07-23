@@ -77,29 +77,38 @@
 <div class="modal" *ngIf="isAddModalOpen">
   <div class="modal-content">
     <form (ngSubmit)="onAddNew()">
+     
       <label>
         Security:
-        <input [(ngModel)]="newInvestment.security" name="newSecurity">
+        <select [(ngModel)]="newInvestment.security" name="newSecurity">
+          <option *ngFor="let securitiesCode of securitiesCodes" [value]="securitiess[securitiesCode]">
+            {{ securitiesCode }}
+          </option>
+        </select>
       </label>
       <label>
         Client:
-        <input [(ngModel)]="newInvestment.client" name="newClient">
+        <select [(ngModel)]="newInvestment.client" name="newClient">
+          <option *ngFor="let clientName of clientNames" [value]="clientss[clientName]">
+            {{ clientName }}
+          </option>
+        </select>
       </label>
       <label>
           Purchase Price:
-        <input [(ngModel)]="newInvestment.purchasePrice" name="newPurchasePrice">
+        <input [(ngModel)]="newInvestment.purchasePrice" name="newPurchasePrice" type="number">
       </label>
       <label>
           Purchase Date:
-        <input [(ngModel)]="newInvestment.purchaseDate" name="newPurchaseDate">
+        <input [(ngModel)]="newInvestment.purchaseDate" name="newPurchaseDate" type="date">
       </label>
       <label>
           Sale Date:
-        <input [(ngModel)]="newInvestment.saleDate" name="newSaleDate">
+        <input [(ngModel)]="newInvestment.saleDate" name="newSaleDate" type="date">
       </label>
       <label>
           Sale Price:
-        <input [(ngModel)]="newInvestment.salePrice" name="newSalePrice">
+        <input [(ngModel)]="newInvestment.salePrice" name="newSalePrice" type="number">
       </label>
       <div class="modal-buttons">
         <button type="submit">Save</button>
