@@ -68,29 +68,33 @@
   </div>
   
  <!-- Modal for Adding -->
- <div class="modal" *ngIf="isAddModalOpen">
+<div class="modal" *ngIf="isAddModalOpen">
   <div class="modal-content">
     <form (ngSubmit)="onAddNew()">
       <label>
         Client:
-      <input [(ngModel)]="newBankDeposit.client" name="newClient">
-    </label>
-    <label>
+        <select [(ngModel)]="newBankDeposit.client" name="newClient">
+          <option *ngFor="let clientName of clientNames" [value]="clientss[clientName]">
+            {{ clientName }}
+          </option>
+        </select>
+      </label>
+      <label>
         Amount:
-      <input [(ngModel)]="newBankDeposit.amount" name="newAmount">
-    </label>
-    <label>
+        <input [(ngModel)]="newBankDeposit.amount" name="newAmount" type="number">
+      </label>
+      <label>
         Interest Rate:
-      <input [(ngModel)]="newBankDeposit.interestRate" name="newInterestRate">
-    </label>
-    <label>
+        <input [(ngModel)]="newBankDeposit.interestRate" name="newInterestRate" type="number">
+      </label>
+      <label>
         Start Date:
-      <input [(ngModel)]="newBankDeposit.startDate" name="newStartDate">
-    </label>
-    <label>
+        <input [(ngModel)]="newBankDeposit.startDate" name="newStartDate" type="date">
+      </label>
+      <label>
         End Date:
-       <input [(ngModel)]="newBankDeposit.endDate" name="newEndDate">
-     </label>
+        <input [(ngModel)]="newBankDeposit.endDate" name="newEndDate" type="date">
+      </label>
       <div class="modal-buttons">
         <button type="submit">Save</button>
         <button type="button" (click)="onCancelAdd()">Cancel</button>
@@ -98,6 +102,7 @@
     </form>
   </div>
 </div>
+
 
   <!-- Modal for Deletion Confirmation -->
   <div class="modal" *ngIf="selectedBankDepositForDeletion">

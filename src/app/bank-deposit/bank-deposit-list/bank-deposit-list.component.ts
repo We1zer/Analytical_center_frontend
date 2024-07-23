@@ -17,6 +17,9 @@ export class BankDepositListComponent {
   selectedBankDepositForDeletion: BankDeposit | null = null;
   clientName: string | null = null;
   clients: { [key: string]: string } = {};
+  clientss: { [key: string]: string } = {};
+  clientDictionary: { [key: string]: string } = {}; 
+  clientNames: string[] = []; 
   newBankDeposit: any = {
     client: "",
     amount: 0,
@@ -48,13 +51,17 @@ export class BankDepositListComponent {
      this.bankDepositService.getClient(clientId).subscribe(
        (data: any) => {
          const client: Client = data.data;
-         this.clients[clientId] = client.name;  // Зберігаємо ім'я клієнта у словнику
+         this.clients[clientId] = client.name;  
+         this.clientss[client.name] = client._id;  
+         this.clientNames = Object.values(this.clients); 
        },
        error => {
          console.error('Error fetching client name:', error);
        }
      );
    }
+
+   
 
   onEdit(bankDeposit: any) {
     this.selectedBankDeposit = { 
@@ -86,6 +93,9 @@ export class BankDepositListComponent {
       },
       error => {
         console.error('Add failed:', error);
+        console.log(this.newBankDeposit);
+        
+        
       }
     );
   }
