@@ -13,6 +13,8 @@ export class QuotationHistoryComponent implements OnInit {
   selectedQuotation: Quotationhistory | null = null;
   selectedQuotationForDeletion: Quotationhistory | null = null;
   securities: { [key: string]: string } = {};
+  securitiess: { [key: string]: string } = {};
+  securitiesCodes: string[] = [];
   sortedQuotations: Quotationhistory[] = [];
   updatedSecurities: { [key: string]: { rating: number, annualYield: number } } = {};
   newQuotation: any = {
@@ -52,7 +54,9 @@ export class QuotationHistoryComponent implements OnInit {
       this.quotationService.getSecurity(securityId).subscribe(
         (data: any) => {
           const security: Security = data.data;
-          this.securities[securityId] = security.securityCode;  // Зберігаємо код безпеки у словнику
+          this.securities[securityId] = security.securityCode; 
+          this.securitiess[security.securityCode] = security._id;  
+          this.securitiesCodes = Object.values(this.securities);
           resolve();
         },
         error => {
