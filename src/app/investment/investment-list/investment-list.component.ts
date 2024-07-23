@@ -16,7 +16,11 @@ export class InvestmentListComponent {
   selectedInvestmentForDeletion: Investment | null = null;
   clientName: string | null = null;
   clients: { [key: string]: string } = {};
+  clientss: { [key: string]: string } = {};
+  clientNames: string[] = []; 
   securities: { [key: string]: string } = {};
+  securitiess: { [key: string]: string } = {};
+  securitiesCodes: string[] = [];
   newInvestment: any = {
     security:  "",
     client:  "",
@@ -55,8 +59,10 @@ export class InvestmentListComponent {
      this.investmentService.getClient(clientId).subscribe(
        (data: any) => {
          const client: Client = data.data;
-         this.clients[clientId] = client.name;  // Зберігаємо ім'я клієнта у словнику
-       },
+         this.clients[clientId] = client.name;
+         this.clientss[client.name] = client._id;  
+         this.clientNames = Object.values(this.clients); 
+         },
        error => {
          console.error('Error fetching client name:', error);
        }
@@ -66,7 +72,9 @@ export class InvestmentListComponent {
     this.investmentService.getSecurity(securityId).subscribe(
       (data: any) => {
         const security: Security = data.data;
-        this.securities[securityId] = security.securityCode;  // Зберігаємо ім'я клієнта у словнику
+        this.securities[securityId] = security.securityCode;  
+        this.securitiess[security.securityCode] = security._id;  
+         this.securitiesCodes = Object.values(this.securities);
       },
       error => {
         console.error('Error fetching security code:', error);
