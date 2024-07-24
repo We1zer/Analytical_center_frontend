@@ -33,7 +33,7 @@ This project is the frontend part of the Analytical center app. It is built usin
 
 ## Live Demo
 
-Check out the live demo of the [Project]().
+Check out the live demo of the [Project](https://analytical-center-frontend-j5fb.vercel.app/).
 
 ## API Documentation
 
